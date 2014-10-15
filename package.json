@@ -1,5 +1,5 @@
 {
-    "name": "atom/expression-parser",
+    "name": "alpha/expression-parser",
     "version": "1.0.0",
     "description": "",
     "dependencies": {}
