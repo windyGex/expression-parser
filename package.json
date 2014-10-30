@@ -2,5 +2,6 @@
     "name": "alpha/expression-parser",
     "version": "1.0.0",
     "description": "",
-    "dependencies": {}
+    "dependencies": {},
+    "output": ["expression-parser.js"]
 }

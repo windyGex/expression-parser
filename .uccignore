@@ -1,0 +1,11 @@
+**/.*
+**/_*
+package.json
+HISTORY.md
+build/
+sites/
+**/README.md
+**/examples/
+**/docs/
+**/tests/
+**/*.seed

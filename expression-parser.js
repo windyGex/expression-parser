@@ -1,6 +1,6 @@
 
-	var LogicExpression = require('./logic-expression');
-	var BooleanExpression = require('./boolean-expression');
+	var LogicExpression = require('./src/logic-expression');
+	var BooleanExpression = require('./src/boolean-expression');
 
 	// 解析逻辑表达式
 	var LOGIC_REG = /\s*((?:\&\&)|(?:\|\|))\s*/g;
