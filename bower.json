@@ -1,0 +1,7 @@
+{
+    "name": "alpha-expression-parser",
+    "description": "",
+    "dependencies": {},
+    "ignore": ["**/.*", "coms/"],
+    "main": ["expression-parser.js"]
+}

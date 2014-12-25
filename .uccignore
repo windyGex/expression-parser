@@ -1,6 +1,7 @@
 **/.*
 **/_*
 package.json
+bower.json
 HISTORY.md
 build/
 sites/
@@ -9,3 +10,4 @@ sites/
 **/docs/
 **/tests/
 **/*.seed
+**/*.psd
