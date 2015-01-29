@@ -21,15 +21,14 @@
 
 	// 逻辑表达式原型
 	// 由上层保证传入的肯定是 LogicExpression 或者 BooleanExpression
-	// not 表示整个表达式结果直接取反
-	function LogicExpression(l, r, lp, not){
+	function LogicExpression(l, r, lp){
 		if(arguments.length == 3 || arguments.length == 4){
 			//this.expression = rst[1];
 			this.l = cid.isCid(l) ? incs[l] : new BooleanExpression(l);
 			this.r = cid.isCid(r) ? incs[r] : new BooleanExpression(r);
 			this.lp = lp;
 			this.fn = lps[lp];
-			this.not = !!not;
+			this.not = false;
 
 			// stamp
 			this.cid = cid(this);

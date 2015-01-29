@@ -25,6 +25,10 @@
 			l = lexp.getAlias();
 		}
 
+		if(not === true) {
+			lexp.not = true;
+		}
+
 		return lexp;
 	};
 
