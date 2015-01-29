@@ -3,6 +3,12 @@
 
 	// 运算符 运算函数
 	var cps = {
+		'===': function(l, r){
+			return l === r;
+		},
+		'!==': function(l, r){
+			return l !== r;
+		},
 		'==': function(l, r){
 			return l == r;
 		},
@@ -27,7 +33,7 @@
 	var incs = cid.incs;
 
 	// 布尔表达式原型
-	var BOOLEAN_REG = /\s*(([^\s]+)\s*((?:\=\=)|(?:\!\=)|(?:\>\=)|(?:\>)|(?:\<\=)|(?:\<))\s*([^\s]+))\s*/g;
+	var BOOLEAN_REG = /\s*(([^\s]+)\s*((?:\=\=\=)|(?:\!\=\=)|(?:\=\=)|(?:\!\=)|(?:\>\=)|(?:\>)|(?:\<\=)|(?:\<))\s*([^\s]+))\s*/g;
 	function BooleanExpression(expression, not){
 		// TODO:
 		// 其实这里可能会返回 LogicExpression 的实例（因为共享一套底层逻辑）
