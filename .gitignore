@@ -17,4 +17,5 @@ Thumbs.db
 *.pyo
 build/
 sites/
-coms/
+bower_components/
+node_modules/

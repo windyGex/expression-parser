@@ -1,0 +1,22 @@
+{
+    "name": "@ali/alpha-expression-parser",
+    "version": "0.0.0",
+    "private": true,
+    "main": "lexer.js",
+    "devDependencies": {
+        "@ali/ipm": "~1.0.2",
+        "@ali/teleport": "~0.11.0",
+        "@ali/alienv": "1.0.0-b12",
+        "mini-daemon": "1.0.0-b3",
+        "@ali/svn2git": "3.x",
+        "jshint": "*",
+        "jison": "~0.4.15"
+    },
+    "scripts": {
+        "build": "teleport",
+        "postinstall": "ipm install --force",
+        "start": "daemon start --harmony env",
+        "stop": "daemon stop",
+        "svn2git": "svn2git"
+    }
+}

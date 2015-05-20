@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+	<title>Url Mocha Runner</title>
+	<link rel="stylesheet" href="http://style.aliunicorn.com/js/5v/lib/mocha/mocha.css?t=0_0"/>
+	<script src="../loader.js"></script>
+	<script src="http://style.aliunicorn.com/js/5v/lib/mocha/mocha.js?t=0_0"></script>
+	<script src="http://style.aliunicorn.com/js/5v/lib/mocha/mocha-helper.js?t=0_0"></script>
+	<link rel="stylesheet" href="http://style.aliunicorn.com/css/6v/run/shippingma/common/??common.css"/>
+	<script>
+		(function () {
+			seajs.config({debug: true});
+		})();
+	</script>
+</head>
+<body>
+
+
+<div id="mocha"></div>
+
+<script>
+	(function () {
+		seajs.use('./spec.js');
+		seajs.use('./spec-issues.js');
+		seajs.use('./spec-1.0.js');
+	})();
+</script>
+</body>
+</html>

@@ -1,7 +1,16 @@
 {
     "name": "alpha-expression-parser",
+    "author": {
+        "name": "葛星",
+        "email": "johnnychen.chenq@alibaba-inc.com"
+    },
     "description": "",
-    "dependencies": {},
-    "ignore": ["**/.*", "coms/"],
-    "main": ["expression-parser.js"]
+    "dependencies": {
+        "alpha-atom": "^1.0.14",
+        "alpha-jquery": "^1.0"
+    },
+    "devDependencies": {
+    },
+    "ignore": ["**/.*", "/"],
+    "main": ["lexer.js"]
 }
