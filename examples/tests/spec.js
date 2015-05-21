@@ -1,23 +1,23 @@
 var $ = require('alpha-jquery/jquery');
 var parser = require('../../expression-parser');
 
-var model = {};
-model.a = 1;
-model.b = 2;
-model.c = function () {
-    return {
-        d: 5
-    }
+var model = {
+    a: 1,
+    b: 2,
+    c: function () {
+        return {
+            d: 5
+        }
+    },
+    e: ['a', 'b', 'c'],
+    f: [false],
+    h: ['a b', 'b c'],
+    g: [
+        {
+            a: 1
+        }
+    ]
 };
-
-model.e = ['a', 'b', 'c'];
-model.f = [false];
-model.h = ['a b', 'b c'];
-model.g = [
-    {
-        a: 1
-    }
-];
 
 console.log(model);
 
@@ -118,10 +118,6 @@ describe('逻辑&&，逻辑||, 语法', function () {
         expect(exec('a>=1 && (c().d == 5 || b>2)')).to.be(true);
     });
 });
-
-
-
-
 
 
 window.$ = $;
