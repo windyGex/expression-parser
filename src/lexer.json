@@ -16,6 +16,7 @@
             ["\\(", "return 'LEFT'"],
             ["\\)", "return 'RIGHT'"],
             ["\\.", "return 'DOT'"],
+            [",", "return ','"],
             ["\\+|\\-|\\*|\/|==|>=|<=|>|<|!=|&&|\\|\\|", "return yytext"],
             ["!", "return 'NOT'"],
             ["$", "return 'EOF'"]
@@ -60,11 +61,20 @@
             ["KEY", "$$ = parseGet(yy.parser.__currentObject, yytext);"],
             ["KEY LEFT RIGHT", "$$ = parseGet(yy.parser.__currentObject, $1); if(typeof $$ =='function'){$$ = $$();}"],
             ["KEY LEFT RIGHT DOT KEY", "$$ = parseGet(yy.parser.__currentObject, $1); if(typeof $$ =='function'){$$ = $$();}; $$= parseGet($$, $5);"],
+            ["KEY LEFT params RIGHT","$$ = parseGet(yy.parser.__currentObject, $1); if(typeof $$ =='function'){$$ = $$.apply(yy.parser.__currentObject, $3.split(','));}"],
+            ["KEY LEFT params RIGHT DOT KEY","$$ = parseGet(yy.parser.__currentObject, $1); if(typeof $$ =='function'){$$ = $$.apply(yy.parser.__currentObject, $3.split(','));};$$= parseGet($$, $6);"],
             ["TRUE", "$$ = true"],
             ["FALSE", "$$ = false"],
             ["NUMBER", "$$ = Number(yytext)"],
             ["ARRAY", "$$ = yytext"],
             ["STRING", "$$ = yytext.replace(/(['\"])([\\w-\\s]*)\\1/,function(all,quote,str){return str;}); "]
+        ],
+
+        "params":[
+            ["KEY","$$ = parseGet(yy.parser.__currentObject, $1)"],
+            ["STRING","$$ = yytext.replace(/(['\"])([\\w-\\s]*)\\1/,function(all,quote,str){return str;});"],
+            ["KEY , params", "$$ = $1 +',' + $3;"],
+            ["STRING , params", "$$ = $1 +',' + $3;"]
         ]
     }
 }
