@@ -166,6 +166,9 @@ var parser = (function () {
                     this.$ = $$[$0 - 2] && $$[$0];
                     break;
                 case 18:
+                    if(!$$[$0]){
+                        $$[$0] = [];
+                    }
                     this.$ = $$[$0].indexOf($$[$0 - 2]) > -1;
                     break;
                 case 19:
