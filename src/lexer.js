@@ -131,6 +131,18 @@ if (typeof Object.create != 'function') {
     })();
 }
 
+if ( typeof Object.getPrototypeOf !== "function" ) {
+    if ( typeof "test".__proto__ === "object" ) {
+        Object.getPrototypeOf = function(object){
+            return object.__proto__;
+        };
+    } else {
+        Object.getPrototypeOf = function(object){
+            return object.constructor.prototype;
+        };
+    }
+}
+
 var parser = (function () {
     var o = function (k, v, o, l) {
         for (o = o || {}, l = k.length; l--; o[k[l]] = v);
