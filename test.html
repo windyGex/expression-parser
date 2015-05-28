@@ -1,4 +1,4 @@
-<script src="lexer.js"></script>
+<script src="./src/lexer.js"></script>
 <script>
     var model = {};
     model.a = 1;
@@ -15,12 +15,16 @@
     model.g = [{
         a:1
     }]
+
+    model.i = function(args){
+        return 2+args;
+    }
     function exec(input) {
         return parser.parse(input, model);
     }
     console.log(exec('1 in [1,2,3]'));
     console.log(exec('(1 in [1,2,3])'));
-    console.log(exec('a >= 1'));
+    console.log(exec('a>=1'));
     console.log(exec('c().d==5'));
     console.log(exec('!(a>=1 && c().d == 5 && b<=2)'));
     console.log(exec('a>=1 && c().d == 5 && b>2'));
@@ -35,5 +39,4 @@
     console.log(exec('"a b" in h'));
     console.log(exec('a+1'));
     console.log(exec('g[0].a+1'));
-    console.log(exec('g[0].a>1'));
 </script>

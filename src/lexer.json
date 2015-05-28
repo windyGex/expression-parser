@@ -7,9 +7,10 @@
             ["in", "return 'in'"],
             ["true", "return 'TRUE'"],
             ["false", "return 'FALSE'"],
-            ["(['\"])[\\w-\\s]*\\1", "return 'STRING'"],
+            ["(['\"])[\\w-\\s\\$_]*\\1", "return 'STRING'"],
             ["(?!['\"\\d])[\\w\\$'\"][\\w\\.\\[\\]\\$'\"]*", "return 'KEY'"],
             ["\\[.*\\]", "return 'ARRAY'"],
+            ["\\{.*\\}", "return 'OBJECT'"],
             ["[0-9]+", "return 'NUMBER'"],
             ["===", "return '==='"],
             ["!==", "return '!=='"],
@@ -18,6 +19,7 @@
             ["\\.", "return 'DOT'"],
             [",", "return ','"],
             ["\\+|\\-|\\*|\/|==|>=|<=|>|<|!=|&&|\\|\\|", "return yytext"],
+            ["\\||\\~|\\:|\\?|\\=", "return yytext"],
             ["!", "return 'NOT'"],
             ["$", "return 'EOF'"]
         ]
@@ -37,8 +39,9 @@
         ],
 
         "program": [
-            ["NOT e", "$$ = !$2;"],
-            ["e", "$$ = $1;"]
+            ["NOT e", "if(typeof $2 == 'function'){ $2 = $2.call(yy.parser.__currentObject)} $$ = !$2;"],
+            ["e", "$$ = $1;"],
+            ["e ? type : type", "if($1){$$ = $3}else{$$ = $5}"]
         ],
 
         "e": [
@@ -56,25 +59,54 @@
             ["e === e", "$$ = $1===$3; "],
             ["e || e", "$$ = $1||$3; "],
             ["e && e", "$$ = $1&&$3; "],
-            ["e in e", "$$ = $3.indexOf($1) > -1; "],
+            ["e in e", "if(!$$){ $$ = [];} $$ = $3.indexOf($1) > -1; "],
             ["LEFT e RIGHT", "$$ = $2;"],
-            ["KEY", "$$ = parseGet(yy.parser.__currentObject, yytext);"],
-            ["KEY LEFT RIGHT", "$$ = parseGet(yy.parser.__currentObject, $1); if(typeof $$ =='function'){$$ = $$();}"],
-            ["KEY LEFT RIGHT DOT KEY", "$$ = parseGet(yy.parser.__currentObject, $1); if(typeof $$ =='function'){$$ = $$();}; $$= parseGet($$, $5);"],
-            ["KEY LEFT params RIGHT","$$ = parseGet(yy.parser.__currentObject, $1); if(typeof $$ =='function'){$$ = $$.apply(yy.parser.__currentObject, $3.split(','));}"],
-            ["KEY LEFT params RIGHT DOT KEY","$$ = parseGet(yy.parser.__currentObject, $1); if(typeof $$ =='function'){$$ = $$.apply(yy.parser.__currentObject, $3.split(','));};$$= parseGet($$, $6);"],
+            ["key", "$$ = $1;"],
+            ["identity = type", "$$ = function(){return SetterHelper(yy.parser.__currentObject, yy.parser.__path, $3)};"],
+            ["identity | filters ", "var filter = function(a, b){var args = [];if (b.__args) {b.__args.unshift(a);args = b.__args;} else {args.unshift(a)}return b.apply(b, args);};if(!($3 instanceof Array)){$3 = [$3];}var value = $1;$3.forEach(function(item){value = filter(value, item);});$$ = value;"]
+        ],
+
+        "identity": [
+            ["KEY", "$$ = GetterHelper(yy.parser.__currentObject, $1);yy.parser.__path = $1;"],
+            //maybe events bind
+            ["KEY LEFT RIGHT", "$$ = GetterHelper(yy.parser.__currentObject, $1); if (typeof $$ == 'function') {var res = $$; $$ = function () {var args = Array.prototype.slice.call(arguments, 0);return res.apply(yy.parser.__currentObject._contextModel, args.concat($3));};} yy.parser.__path = $1;"],
+            ["KEY LEFT RIGHT DOT KEY", "$$ = GetterHelper(yy.parser.__currentObject, $1); if(typeof $$ =='function'){$$ = $$.call(yy.parser.__currentObject);} $$= $$[$5]; yy.parser.__path = $1;"],
+            //maybe events bind
+            ["KEY LEFT params RIGHT", "$$ = GetterHelper(yy.parser.__currentObject, $1); if (typeof $$ == 'function') {var res = $$; $$ = function () {var args = Array.prototype.slice.call(arguments, 0);return res.apply(yy.parser.__currentObject._contextModel, args.concat($3));};} yy.parser.__path = $1;"],
+            ["KEY LEFT params RIGHT DOT KEY", "$$ = GetterHelper(yy.parser.__currentObject, $1); if(typeof $$ =='function'){$$ = $$.apply(yy.parser.__currentObject, $3);} $$= $$[$6]; yy.parser.__path = $1;"]
+        ],
+
+        "key": [
+            ["identity", "if(typeof $1 == 'function'){$1 = $1.bind(yy.parser.__currentObject)} $$ = $1;"],
+            ["type", "$$ = $1"]
+        ],
+
+        "type": [
             ["TRUE", "$$ = true"],
             ["FALSE", "$$ = false"],
             ["NUMBER", "$$ = Number(yytext)"],
-            ["ARRAY", "$$ = yytext"],
-            ["STRING", "$$ = yytext.replace(/(['\"])([\\w-\\s]*)\\1/,function(all,quote,str){return str;}); "]
+            ["ARRAY", "var obj = (new Function('return ' + $1))();$$ = obj;"],
+            ["STRING", "$$ = yytext.replace(/(['\"])([\\w-\\s\\$_]*)\\1/,function(all,quote,str){return str;}); "]
         ],
 
-        "params":[
-            ["KEY","$$ = parseGet(yy.parser.__currentObject, $1)"],
-            ["STRING","$$ = yytext.replace(/(['\"])([\\w-\\s]*)\\1/,function(all,quote,str){return str;});"],
-            ["KEY , params", "$$ = $1 +',' + $3;"],
-            ["STRING , params", "$$ = $1 +',' + $3;"]
+        "params": [
+            ["param", "$$ = [$1];"],
+            ["param , params", "var args = []; if($3 instanceof Array){$3.unshift($1[0]);args= $3;}else{args.push($1, $3)} $$=args;"]
+        ],
+
+        "param": [
+            ["key", "$$ = $1"],
+            ["OBJECT", "var obj = (new Function('return ' + $1))();$$ = obj;"]
+        ],
+
+        "filters": [
+            ["filter", "$$ = $1;"],
+            ["filter | filters", "var args = []; if($3 instanceof Array){$3.unshift($1);args= $3;}else{args.push($1, $3)} $$=args;"]
+
+        ],
+        "filter": [
+            ["KEY", "$$= Filters[$1];"],
+            ["KEY ~ params", "$$ = Filters[$1]; Filters[$1].__args = $3;"]
         ]
     }
 }
