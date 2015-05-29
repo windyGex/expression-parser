@@ -19,10 +19,6 @@
         model.g = [{
             a:1
         }]
-
-        model.i = function(){
-            console.log(arguments);
-        }
         function exec(input) {
             return parser.parse(input, model);
         }
@@ -43,7 +39,6 @@
         console.log(exec('"a b" in h'));
         console.log(exec('a+1'));
         console.log(exec('g[0].a+1'));
-        console.log(exec('i(b)'));
 
 # Not Support
 

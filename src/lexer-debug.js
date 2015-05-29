@@ -71,60 +71,6 @@
  recoverable: (boolean: TRUE when the parser has a error recovery rule available for this particular error)
  }
  */
-
-var parseGet = function (object, path) {
-    path = path.toString();
-    var self = object, field = path.split('.'), val, key;
-    if (field.length) {
-        key = field[0];
-        //lists[1].name
-        if (key.indexOf('[') >= 0) {
-            key = key.match(/(.*)\[(.*)\]/);
-            if (key) {
-                val = object[key[1]][key[2]];
-            }
-        } else {
-            val = object[field[0]];
-        }
-        if (val) {
-            for (var i = 1; i < field.length; i++) {
-                val = val[field[i]];
-                if (typeof val === 'undefined') {
-                    break;
-                }
-            }
-        }
-    }
-    return val;
-};
-
-
-if (typeof Object.create != 'function') {
-    Object.create = (function() {
-        function Temp() {}
-        var hasOwn = Object.prototype.hasOwnProperty;
-        return function (O) {
-            if (typeof O != 'object') {
-                throw TypeError('Object prototype may only be an Object or null');
-            }
-
-            Temp.prototype = O;
-            var obj = new Temp();
-            Temp.prototype = null;
-
-            if (arguments.length > 1) {
-                var Properties = Object(arguments[1]);
-                for (var prop in Properties) {
-                    if (hasOwn.call(Properties, prop)) {
-                        obj[prop] = Properties[prop];
-                    }
-                }
-            }
-            return obj;
-        };
-    })();
-}
-
 var parser = (function () {
     var o = function (k, v, o, l) {
         for (o = o || {}, l = k.length; l--; o[k[l]] = v);
@@ -152,66 +98,79 @@ var parser = (function () {
                     break;
                 case 4:
                     this.$ = $$[$0 - 2] + $$[$0];
+                    console.log('+', $$[$0 - 2], $$[$0]);
                     break;
                 case 5:
                     this.$ = $$[$0 - 2] - $$[$0];
+                    console.log('-', $$[$0 - 2], $$[$0]);
                     break;
                 case 6:
                     this.$ = $$[$0 - 2] * $$[$0];
+                    console.log('*', $$[$0 - 2], $$[$0]);
                     break;
                 case 7:
                     this.$ = $$[$0 - 2] / $$[$0];
+                    console.log('/', $$[$0 - 2], $$[$0]);
                     break;
                 case 8:
                     this.$ = $$[$0 - 2] > $$[$0];
+                    console.log('>', $$[$0 - 2], $$[$0]);
                     break;
                 case 9:
                     this.$ = $$[$0 - 2] < $$[$0];
+                    console.log('<', $$[$0 - 2], $$[$0]);
                     break;
                 case 10:
                     this.$ = $$[$0 - 2] == $$[$0];
+                    console.log('==', $$[$0 - 2], $$[$0]);
                     break;
                 case 11:
                     this.$ = $$[$0 - 2] >= $$[$0];
+                    console.log('>=', $$[$0 - 2], $$[$0]);
                     break;
                 case 12:
                     this.$ = $$[$0 - 2] <= $$[$0];
+                    console.log('<=', $$[$0 - 2], $$[$0]);
                     break;
                 case 13:
                     this.$ = $$[$0 - 2] != $$[$0];
+                    console.log('!=', $$[$0 - 2], $$[$0]);
                     break;
                 case 14:
                     this.$ = $$[$0 - 2] !== $$[$0];
+                    console.log('!==', $$[$0 - 2], $$[$0]);
                     break;
                 case 15:
                     this.$ = $$[$0 - 2] === $$[$0];
+                    console.log('==', $$[$0 - 2], $$[$0]);
                     break;
                 case 16:
                     this.$ = $$[$0 - 2] || $$[$0];
+                    console.log('||', $$[$0 - 2], $$[$0]);
                     break;
                 case 17:
                     this.$ = $$[$0 - 2] && $$[$0];
+                    console.log('&&', $$[$0 - 2], $$[$0]);
                     break;
                 case 18:
-                    if(!$$[$0]){
-                        $$[$0] = [];
-                    }
                     this.$ = $$[$0].indexOf($$[$0 - 2]) > -1;
+                    console.log('in', $$[$0 - 2], $$[$0]);
                     break;
                 case 19:
                     this.$ = $$[$0 - 1];
                     break;
                 case 20:
-                    this.$ = parseGet(yy.parser.__currentObject, yytext);
+                    this.$ = parseGet(window.model, yytext);
+                    console.log('KEY', yytext);
                     break;
                 case 21:
-                    this.$ = parseGet(yy.parser.__currentObject, $$[$0 - 2]);
+                    this.$ = parseGet(window.model, $$[$0 - 2]);
                     if (typeof this.$ == 'function') {
                         this.$ = this.$();
                     }
                     break;
                 case 22:
-                    this.$ = parseGet(yy.parser.__currentObject, $$[$0 - 4]);
+                    this.$ = parseGet(window.model, $$[$0 - 4]);
                     if (typeof this.$ == 'function') {
                         this.$ = this.$();
                     }
@@ -234,6 +193,7 @@ var parser = (function () {
                     this.$ = yytext.replace(/(['"])([\w-\s]*)\1/, function (all, quote, str) {
                         return str;
                     });
+                    console.log(yytext);
                     break;
             }
         },
@@ -297,9 +257,8 @@ var parser = (function () {
                 throw new Error(str);
             }
         },
-        parse: function parse(input, __object) {
+        parse: function parse(input) {
             var self = this, stack = [0], tstack = [], vstack = [null], lstack = [], table = this.table, yytext = '', yylineno = 0, yyleng = 0, recovering = 0, TERROR = 2, EOF = 1;
-            this.__currentObject = __object;
             var args = lstack.slice.call(arguments, 1);
             var lexer = Object.create(this.lexer);
             var sharedState = { yy: {} };
@@ -836,4 +795,5 @@ if (typeof require !== 'undefined' && typeof exports !== 'undefined') {
         return parser.parse.apply(parser, arguments);
     };
     exports.run = exports.parse;
+
 }
