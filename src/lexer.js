@@ -240,7 +240,7 @@ var parser = (function () {
                     this.$ = Number(yytext)
                     break;
                 case 26:
-                    this.$ = yytext
+                    this.$ = (new Function('return ' + yytext))();
                     break;
                 case 27:
                     this.$ = yytext.replace(/(['"])([\w-\s]*)\1/, function (all, quote, str) {

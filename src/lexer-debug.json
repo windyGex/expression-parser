@@ -63,7 +63,7 @@
             ["TRUE", "$$ = true"],
             ["FALSE", "$$ = false"],
             ["NUMBER", "$$ = Number(yytext)"],
-            ["ARRAY", "$$ = yytext"],
+            ["ARRAY", "$$ = (new Function('return ' + yytext))();console.log(yytext);"],
             ["STRING", "$$ = yytext.replace(/(['\"])([\\w-\\s]*)\\1/,function(all,quote,str){return str;}); console.log(yytext);"]
         ]
     }
