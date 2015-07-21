@@ -1,0 +1,10 @@
+**/.*
+bower.json
+**/examples/
+**/docs/
+**/tests/
+**/mcms.json
+env
+node_modules/
+bower_components/
+Thumbs.db
