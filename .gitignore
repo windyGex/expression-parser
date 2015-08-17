@@ -1,3 +1,5 @@
+.DS_Store
+Thumbs.db
 *.iml
 .idea/
 .ipr
@@ -7,15 +9,17 @@
 *.diff
 *.patch
 *.bak
-.DS_Store
-Thumbs.db
 .project
 .*proj
 .svn/
 *.swp
 *.pyc
 *.pyo
-build/
-sites/
+.build/
 bower_components/
 node_modules/
+*.log
+**/.*
+!.editorconfig
+!.gitignore
+!.npmignore
