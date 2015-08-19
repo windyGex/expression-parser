@@ -1,18 +1,15 @@
 {
     "name": "@alife/alpha-expression-parser",
-    "version": "2.0.5",
+    "version": "2.0.6",
     "dependencies": {
-        "@alife/alpha-atom": "^1.0.14",
         "@alife/alpha-jquery": "^1.0"
     },
     "devDependencies": {
-        "@ali/bowerman": "~1.0.0",
-        "@alife/alpha-thousand": "^1.x"
+        "@alife/alpha-thousand": "^1.x",
+        "@alife/alpha-atom": "^1.0.14"
     },
     "publishConfig": {
         "registry": "http://registry.npm.alibaba-inc.com"
     },
-    "scripts": {
-        "postpublish": "bowerman"
-    }
+    "description": ""
 }
