@@ -6,10 +6,14 @@
     },
     "devDependencies": {
         "@alife/alpha-thousand": "^1.x",
-        "@alife/alpha-atom": "^1.0.14"
+        "@alife/alpha-atom": "^1.0.14",
+        "@ali/f2ehint-hook": "2.x"
     },
     "publishConfig": {
         "registry": "http://registry.npm.alibaba-inc.com"
     },
-    "description": ""
+    "description": "",
+    "scripts": {
+        "hint": "f2ehint-hook --check"
+    }
 }
