@@ -1,10 +1,10 @@
 ## Install
 
-    npm install expression-parser
+    npm install expression-parser-js
 
 ## Usage
 
-    var parser = require('expression-parser');
+    var parser = require('expression-parser-js');
     parser.parse(input, model)
 
 ## examples
