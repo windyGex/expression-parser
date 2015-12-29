@@ -1,13 +1,18 @@
 {
-  "name": "@alife/alpha-expression-parser",
-  "version": "2.1.0",
-  "devDependencies": {
-    "@alife/alpha-atom": "1.x",
-    "@alife/alpha-jquery": "^1.0",
-    "@alife/alpha-pre": "~2.0.0",
-    "jison": "0.4.13"
-  },
-  "publishConfig": {
-    "registry": "http://registry.npm.alibaba-inc.com"
-  }
+    "name": "@alife/alpha-expression-parser",
+    "version": "2.1.0",
+    "devDependencies": {
+        "@alife/alpha-atom": "1.x",
+        "@alife/alpha-jquery": "^1.0",
+        "@alife/alpha-pre": "~2.0.0",
+        "jison": "0.4.13"
+    },
+    "publishConfig": {
+        "registry": "http://registry.npm.alibaba-inc.com"
+    },
+    "description": "",
+    "scripts": {
+        "hint": "f2ehint-hook --check"
+    }
 }
+
