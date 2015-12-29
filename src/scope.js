@@ -66,7 +66,10 @@ var scope = {
 
 parser.yy = scope;
 
-exports.run = function (input, object) {
+var run = function (input, object) {
     model = object;
     return parser.parse(input);
 };
+
+exports.parse = run;
+exports.run = run;
