@@ -1,3 +1,9 @@
+## Why Expression Parser?
+
+* Small and simple, but powerful.
+
+* No dependency, no ast.
+
 ## Install
 
     npm install expression-parser-js
