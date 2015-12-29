@@ -1,18 +1,15 @@
 {
-    "name": "@alife/alpha-expression-parser",
-    "version": "2.1.0",
-    "devDependencies": {
-        "@alife/alpha-atom": "1.x",
-        "@alife/alpha-jquery": "^1.0",
-        "@alife/alpha-pre": "~2.0.0",
-        "jison": "0.4.13"
-    },
-    "publishConfig": {
-        "registry": "http://registry.npm.alibaba-inc.com"
-    },
-    "description": "",
-    "scripts": {
-        "hint": "f2ehint-hook --check"
-    }
+  "name": "expression-parser",
+  "version": "0.0.1",
+  "author": {
+    "windyge": "gxll1314@gmail.com"
+  },
+  "devDependencies": {
+    "expect.js": "~0.3.1",
+    "gulp": "~3.9.0",
+    "gulp-browserify": "~0.5.1",
+    "jison": "0.4.13",
+    "mocha": "~2.3.4"
+  },
+  "description": "Implementation of logical expressions for JavaScript."
 }
-

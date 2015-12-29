@@ -1,6 +1,5 @@
-var $ = require('alpha-jquery/jquery');
-var parser = require('/expression-parser');
-var expect = require('alpha-pre/expect');
+var parser = require('../expression-parser');
+var expect = require('expect.js');
 var model = {
     a: 1,
     b: 2,

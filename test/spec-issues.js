@@ -1,5 +1,5 @@
-var parser = require('/expression-parser');
-var expect = require('alpha-pre/expect');
+var parser = require('../expression-parser');
+var expect = require('expect.js');
 describe('Issues', function () {
     it('http://gitlab.alibaba-inc.com/alpha/expression-parser/issues/1', function () {
         var expression = '!( var0 == "CARTON" || var1 == "PALLETS" || var2 == "WOODENBOX" )';
