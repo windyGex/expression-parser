@@ -1,1 +1,1 @@
-module.exports = require('./src/lexer');
+module.exports = require('./src/scope');

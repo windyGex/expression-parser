@@ -1,6 +1,6 @@
 var $ = require('alpha-jquery/jquery');
-var parser = require('../../expression-parser');
-
+var parser = require('/expression-parser');
+var expect = require('alpha-pre/expect');
 var model = {
     a: 1,
     b: 2,
@@ -19,7 +19,6 @@ var model = {
     ]
 };
 
-console.log(model);
 
 function exec(input, json) {
     return parser.run(input, json || model);
@@ -27,13 +26,13 @@ function exec(input, json) {
 
 describe('Array 基本语法', function () {
 
-    it('e==["a", "b", "c"]', function () {
-        expect(exec('e==["a", "b", "c"]')).to.be(true);
-    });
-
-    it('x == [3,4] && y ==1', function () {
-        expect(exec('x == [3,4]', {x: [3, 4], y: 1})).to.be(true);
-    });
+    //it('e==["a", "b", "c"]', function () {
+    //    expect(exec('e==["a", "b", "c"]')).to.be(true);
+    //});
+    //
+    //it('x == [3,4] && y ==1', function () {
+    //    expect(exec('x == [3,4]', {x: [3, 4], y: 1})).to.be(true);
+    //});
 
     it('x in [3,4] && y in [3,4]', function () {
         expect(exec('x in [3,4] && y in [3,4]', {x: 3, y: 4})).to.be(true);
@@ -120,6 +119,3 @@ describe('逻辑&&，逻辑||, 语法', function () {
 });
 
 
-window.$ = $;
-
-mocha.run();

@@ -1,0 +1,19 @@
+default:
+  prepare:
+    exec:
+    - yum install -y alinode-0.12.6 -b current
+    - rm -f /opt/taobao/node
+    - ln -s /opt/taobao/install/node.js /opt/taobao/node
+    - echo 'export PATH=/opt/taobao/node/bin:$PATH' >> /etc/bashrc
+    - npm install tnpm -g --registry=http://registry.npm.alibaba-inc.com
+    - tnpm install
+    - tnpm install @ali/totoro -g
+    - tnpm install mini-daemon -g
+    - tnpm install @ali/alienv
+    - totoro config --host=totoroserver.alibaba.net
+    - daemon start --harmony ./node_modules/.bin/alienv test --port=8080
+
+  unit_test:
+    exec:
+    - totoro --runner=http://127.0.0.1:8080/tests/runner.md --adapter=no
+    - daemon stop

@@ -1,5 +1,5 @@
-var parser = require('../../expression-parser');
-
+var parser = require('/expression-parser');
+var expect = require('alpha-pre/expect');
 describe('动态表单', function () {
     it('name1==value1', function () {
         expect(parser.run("name1==value1", {"name1": "value1"})).to.be(false);

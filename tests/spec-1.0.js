@@ -1,6 +1,6 @@
-var parser = require('../../expression-parser');
+var parser = require('/expression-parser');
 var $ = require('alpha-jquery/jquery');
-
+var expect = require('alpha-pre/expect');
 
 describe('ExpressionParser', function () {
     it('简单表达式: x > 3', function () {
