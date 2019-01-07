@@ -1,4 +1,4 @@
-var parser = require('../expression-parser');
+var parser = require('../index');
 var expect = require('expect.js');
 describe('ExpressionParser', function () {
     it('简单表达式: x > 3', function () {

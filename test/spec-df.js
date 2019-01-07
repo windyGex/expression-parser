@@ -1,4 +1,4 @@
-var parser = require('../expression-parser');
+var parser = require('../index');
 var expect = require('expect.js');
 describe('动态表单', function () {
     it('name1==value1', function () {

@@ -1,4 +1,4 @@
-var parser = require('../expression-parser');
+var parser = require('../index');
 var expect = require('expect.js');
 var model = {
     a: 1,

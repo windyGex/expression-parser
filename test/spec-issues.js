@@ -1,4 +1,4 @@
-var parser = require('../expression-parser');
+var parser = require('../index');
 var expect = require('expect.js');
 describe('Issues', function () {
     it('http://gitlab.alibaba-inc.com/alpha/expression-parser/issues/1', function () {
@@ -17,4 +17,9 @@ describe('Issues', function () {
         expect(parser.run(expression, {params:[]})).to.equal(false);
         expect(parser.run(expression, {params:[1]})).to.equal(true);
     });
+
+    it('support in', function() {
+        var expression = 'input.length > 0';
+        expect(parser.run(expression, {input:[]})).to.equal(false);
+    })
 });

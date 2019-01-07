@@ -3,8 +3,8 @@
 
     "lex": {
         "rules": [
+            ["\\sin\\s", "return 'in'"],
             ["\\s+", "/* skip whitespace */"],
-            ["in", "return 'in'"],
             ["true", "return 'TRUE'"],
             ["false", "return 'FALSE'"],
             ["(['\"])[\\w-\\s]*\\1", "return 'STRING'"],

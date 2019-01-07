@@ -78,7 +78,7 @@ symbols_: {"error":2,"expressions":3,"program":4,"EOF":5,"NOT":6,"e":7,"+":8,"-"
 terminals_: {2:"error",5:"EOF",6:"NOT",8:"+",9:"-",10:"*",11:"/",12:">",13:"<",14:"==",15:">=",16:"<=",17:"!=",18:"!==",19:"===",20:"||",21:"&&",22:"in",23:"LEFT",24:"RIGHT",25:"KEY",26:"DOT",27:"TRUE",28:"FALSE",29:"NUMBER",30:"ARRAY",31:"STRING"},
 productions_: [0,[3,2],[4,2],[4,1],[7,3],[7,3],[7,3],[7,3],[7,3],[7,3],[7,3],[7,3],[7,3],[7,3],[7,3],[7,3],[7,3],[7,3],[7,3],[7,3],[7,1],[7,3],[7,5],[7,1],[7,1],[7,1],[7,1],[7,1]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */
-/**/) {
+/*``*/) {
 /* this == yyval */
 
 var $0 = $$.length - 1;
@@ -603,13 +603,13 @@ stateStackSize:function stateStackSize() {
     },
 options: {},
 performAction: function anonymous(yy,yy_,$avoiding_name_collisions,YY_START
-/**/) {
+/*``*/) {
 
 var YYSTATE=YY_START;
 switch($avoiding_name_collisions) {
-case 0:/* skip whitespace */
+case 0:return 22
 break;
-case 1:return 22
+case 1:/* skip whitespace */
 break;
 case 2:return 27
 break;
@@ -643,7 +643,7 @@ case 16:return 5
 break;
 }
 },
-rules: [/^(?:\s+)/,/^(?:in)/,/^(?:true)/,/^(?:false)/,/^(?:(['"])[\w-\s]*\1)/,/^(?:(?!['"\d])[\w\$'"][\w\.\[\]\$'"]*)/,/^(?:\[.*?\])/,/^(?:[0-9]+)/,/^(?:===)/,/^(?:!==)/,/^(?:\()/,/^(?:\))/,/^(?:\.)/,/^(?:,)/,/^(?:\+|\-|\*|\/|==|>=|<=|>|<|!=|&&|\|\|)/,/^(?:!)/,/^(?:$)/],
+rules: [/^(?:\sin\s)/,/^(?:\s+)/,/^(?:true)/,/^(?:false)/,/^(?:(['"])[\w-\s]*\1)/,/^(?:(?!['"\d])[\w\$'"][\w\.\[\]\$'"]*)/,/^(?:\[.*?\])/,/^(?:[0-9]+)/,/^(?:===)/,/^(?:!==)/,/^(?:\()/,/^(?:\))/,/^(?:\.)/,/^(?:,)/,/^(?:\+|\-|\*|\/|==|>=|<=|>|<|!=|&&|\|\|)/,/^(?:!)/,/^(?:$)/],
 conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],"inclusive":true}}
 };
 return lexer;
